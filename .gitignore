@@ -1,4 +1,6 @@
 settings.json
 *.o
+*.a
 c_cpp_properties.json
 .vscode
+.DS_Store

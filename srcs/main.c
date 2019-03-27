@@ -6,7 +6,7 @@
 /*   By: acolas <acolas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/27 11:49:55 by acolas            #+#    #+#             */
-/*   Updated: 2019/03/27 14:43:30 by acolas           ###   ########.fr       */
+/*   Updated: 2019/03/27 16:18:49 by acolas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,9 @@ int		main(int ac, char **av)
 {
 	if (ac == 4)
 	{
-		ft_printf("Yeah!\n");
-		ft_printf("%s\n", av[1]);
+		//count_ants(av[1]);
+		//parse_map(av[2], av[3]);
+		ft_printf(av[1]);
 	}
 	else
 		ft_printf("ERROR");
