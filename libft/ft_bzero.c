@@ -1,29 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_free_arr.c                                      :+:      :+:    :+:   */
+/*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acolas <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: bsouchet <bsouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/01/29 15:29:58 by acolas            #+#    #+#             */
-/*   Updated: 2019/02/12 16:40:58 by acolas           ###   ########.fr       */
+/*   Created: 2017/05/03 22:28:17 by bsouchet          #+#    #+#             */
+/*   Updated: 2017/05/03 22:28:18 by bsouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_free_arr(char **a)
+void	ft_bzero(void *s, size_t n)
 {
-	int	i;
-
-	i = 0;
-	if (a == NULL)
-		return ;
-	while (a[i])
-	{
-		free(a[i]);
-		i++;
-	}
-	free(a);
-	a = NULL;
+	if (n)
+		ft_memset(s, 0, n);
 }

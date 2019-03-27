@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   strchr.c                                           :+:      :+:    :+:   */
+/*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acolas <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: bsouchet <bsouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/04/26 17:18:53 by acolas            #+#    #+#             */
-/*   Updated: 2017/04/26 17:53:06 by acolas           ###   ########.fr       */
+/*   Created: 2017/05/03 22:29:07 by bsouchet          #+#    #+#             */
+/*   Updated: 2017/05/03 22:29:08 by bsouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,5 @@
 
 char	*ft_strchr(const char *s, int c)
 {
-	while (*s != (char)c && *s != '\0')
-		s++;
-	if (*s == ((char)c))
-		return ((char *)s);
-	return (NULL);
+	return (ft_memchr(s, c, ft_strlen(s) + 1));
 }

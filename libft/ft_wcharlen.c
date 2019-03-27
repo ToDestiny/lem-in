@@ -1,29 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_free_arr.c                                      :+:      :+:    :+:   */
+/*   ft_wcharlen.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acolas <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: bsouchet <bsouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/01/29 15:29:58 by acolas            #+#    #+#             */
-/*   Updated: 2019/02/12 16:40:58 by acolas           ###   ########.fr       */
+/*   Created: 2017/05/03 22:30:13 by bsouchet          #+#    #+#             */
+/*   Updated: 2017/05/05 23:43:19 by bsouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_free_arr(char **a)
+size_t	ft_wcharlen(unsigned wc)
 {
-	int	i;
-
-	i = 0;
-	if (a == NULL)
-		return ;
-	while (a[i])
-	{
-		free(a[i]);
-		i++;
-	}
-	free(a);
-	a = NULL;
+	if (wc < 0x80)
+		return (1);
+	else if (wc < 0x800)
+		return (2);
+	else if (wc < 0x10000)
+		return (3);
+	return (4);
 }

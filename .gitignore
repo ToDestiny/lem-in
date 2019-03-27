@@ -1,0 +1,4 @@
+settings.json
+*.o
+c_cpp_properties.json
+.vscode

@@ -1,29 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_free_arr.c                                      :+:      :+:    :+:   */
+/*   ft_strchri.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acolas <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: bsouchet <bsouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/01/29 15:29:58 by acolas            #+#    #+#             */
-/*   Updated: 2019/02/12 16:40:58 by acolas           ###   ########.fr       */
+/*   Created: 2017/05/03 15:52:58 by bsouchet          #+#    #+#             */
+/*   Updated: 2017/05/03 15:53:19 by bsouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_free_arr(char **a)
+int		ft_strchri(char *s, int c, int i)
 {
-	int	i;
+	while (s[++i])
+		if (s[i] == c)
+			return (i);
+	return (-1);
+}
 
-	i = 0;
-	if (a == NULL)
-		return ;
-	while (a[i])
-	{
-		free(a[i]);
-		i++;
-	}
-	free(a);
-	a = NULL;
+int		ft_strchri_lu(char *s, int c, int i)
+{
+	i = -1;
+	while (s[++i])
+		if (s[i] == c || s[i] == c + 32)
+			return (i);
+	return (-1);
 }

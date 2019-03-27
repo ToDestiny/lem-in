@@ -6,13 +6,20 @@
 /*   By: acolas <acolas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/27 11:49:55 by acolas            #+#    #+#             */
-/*   Updated: 2019/03/27 11:51:46 by acolas           ###   ########.fr       */
+/*   Updated: 2019/03/27 14:43:30 by acolas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lem-in.h"
+#include "lemin.h"
 
-int     main(void)
+int		main(int ac, char **av)
 {
-    
+	if (ac == 4)
+	{
+		ft_printf("Yeah!\n");
+		ft_printf("%s\n", av[1]);
+	}
+	else
+		ft_printf("ERROR");
+	return (0);
 }

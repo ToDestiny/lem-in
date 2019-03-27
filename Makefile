@@ -6,11 +6,11 @@
 #    By: acolas <acolas@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/01/07 16:54:15 by acolas            #+#    #+#              #
-#    Updated: 2019/03/27 11:47:16 by acolas           ###   ########.fr        #
+#    Updated: 2019/03/27 15:49:10 by acolas           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-EXEC_FILE = lem-in
+NAME = lem-in
 SRCS = srcs/main.c \
 
 OBJS = $(SRCS:.c=.o)
@@ -20,23 +20,23 @@ CFLAGS = -Wall -Wextra -Werror
 
 .PHONY : all clean fclean re
 
-all : $(EXEC_FILE)
+all : $(NAME)
 
-$(EXEC_FILE) : $(OBJS) libft/libft.a  
-		@$(CC) $(CFLAGS) -Llibft -lft $^ -o $@
+$(NAME) : $(OBJS) libft/libft.a  
+		$(CC) $(CFLAGS) -Llibft -lft $^ -o $@
 
 %.o: %.c
-	    @$(CC) $(CFLAGS) $(INCLUDES) -c $^ -o $@
+	    $(CC) $(CFLAGS) $(INCLUDES) -c $^ -o $@
 
 libft/libft.a:
-		@make -C libft
+		make -C libft
 
 clean :
-		@make -C libft clean
-		@rm -rf $(OBJS)
+		make -C libft clean
+		rm -rf $(OBJS)
 
 fclean : clean
-		@make -C libft fclean
-		@rm -rf $(EXEC_FILE)
+		make -C libft fclean
+		rm -rf $(NAME)
 
 re : fclean all

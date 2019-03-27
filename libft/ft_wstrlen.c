@@ -1,29 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_free_arr.c                                      :+:      :+:    :+:   */
+/*   ft_wstrlen.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acolas <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: acolas <acolas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/01/29 15:29:58 by acolas            #+#    #+#             */
-/*   Updated: 2019/02/12 16:40:58 by acolas           ###   ########.fr       */
+/*   Created: 2017/05/03 22:30:20 by bsouchet          #+#    #+#             */
+/*   Updated: 2019/03/27 15:45:06 by acolas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_printf.h"
 
-void	ft_free_arr(char **a)
+size_t		ft_wstrlen(unsigned *s)
 {
-	int	i;
+	size_t	len;
 
-	i = 0;
-	if (a == NULL)
-		return ;
-	while (a[i])
+	len = 0;
+	while (*s != L'\0')
 	{
-		free(a[i]);
-		i++;
+		len += ft_wcharlen(*s);
+		++s;
 	}
-	free(a);
-	a = NULL;
+	return (len);
 }

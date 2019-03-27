@@ -81,8 +81,17 @@ SRC = ft_putchar.c \
 	  ft_lstmap.c \
 	  get_next_line.c \
 	  ft_free_arr.c \
+	  parse_arguments.c \
+	  handle_strings.c \
+	  handle_numbers.c \
+	  bonus_functions.c \
+	  ft_printf.c \
+	  ft_strchri.c \
+	  ft_wstrlen.c \
+	  ft_wcharlen.c \
+	  ft_pow.c \
 
-INC = libft.h
+INC = -I includes/
 
 OBJ = $(SRC:.c=.o)
 

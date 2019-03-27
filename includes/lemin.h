@@ -6,12 +6,14 @@
 /*   By: acolas <acolas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/27 11:46:52 by acolas            #+#    #+#             */
-/*   Updated: 2019/03/27 11:52:24 by acolas           ###   ########.fr       */
+/*   Updated: 2019/03/27 15:48:32 by acolas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LEMIN.H
-# define LEMIN.H
+#ifndef LEMIN_H
+# define LEMIN_H
 # include "../libft/libft.h"
+
+int				ft_printf(const char *fm, ...);
 
 #endif
