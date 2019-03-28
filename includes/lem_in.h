@@ -6,7 +6,7 @@
 /*   By: acolas <acolas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/27 11:46:52 by acolas            #+#    #+#             */
-/*   Updated: 2019/03/28 14:36:24 by acolas           ###   ########.fr       */
+/*   Updated: 2019/03/28 15:12:24 by acolas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ typedef	struct 		s_ant
 int				ft_printf(const char *fm, ...);
 t_list			*add_to_the_end_of_list(t_list *head, t_list *new);
 int				parse_params(char **av);
+void			validate(t_list *map, int params);
 
 
 #endif

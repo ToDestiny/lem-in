@@ -6,7 +6,7 @@
 /*   By: acolas <acolas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/27 11:49:55 by acolas            #+#    #+#             */
-/*   Updated: 2019/03/28 14:36:30 by acolas           ###   ########.fr       */
+/*   Updated: 2019/03/28 14:41:00 by acolas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,10 +54,10 @@ int		main(int ac, char **av)
 		new->content = line;
 		map = add_to_the_end_of_list(map, new);
 	}
-	argc ? (params = parse_params(av)) :
+	ac ? (params = parse_params(av)) :
 		(params = 0);
 	if (!map)
-		put_err_msg_exit("Usage: You need to give a valid map");
+		put_err_msg_exit("Usage: You need to give a valid map.");
 	validate(map, params);
 	if (params == 1)
 		system("leaks lem-in");
