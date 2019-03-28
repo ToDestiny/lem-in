@@ -6,7 +6,7 @@
 /*   By: acolas <acolas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/28 14:39:36 by acolas            #+#    #+#             */
-/*   Updated: 2019/03/28 15:34:31 by acolas           ###   ########.fr       */
+/*   Updated: 2019/03/28 17:30:03 by acolas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,11 @@ void	check_rooms(t_list *rooms, t_room *to_find)
 		if (!ft_strcmp(room->name, to_find->name))
 			put_err_msg_exit("Rooms can't have same names");
 	}
+}
+
+void	check_paths(t_list *paths, t_room *links)
+{
+
 }
 
 void	validate(t_list *map, int params)
