@@ -6,7 +6,7 @@
 /*   By: acolas <acolas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/27 11:46:52 by acolas            #+#    #+#             */
-/*   Updated: 2019/03/29 15:11:22 by acolas           ###   ########.fr       */
+/*   Updated: 2019/03/29 15:42:49 by acolas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,6 @@ int				parse_params(char **av);
 void			validate(t_list *map, int params);
 void			check_rooms(t_list *rooms, t_room *to_find);
 void			*validate_room(char *str, t_list *head, int start_end);
-void	set_links(t_room **room_one, t_room **room_two);
+void			set_links(t_room **room_one, t_room **room_two);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: acolas <acolas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/28 14:39:36 by acolas            #+#    #+#             */
-/*   Updated: 2019/03/29 14:52:17 by acolas           ###   ########.fr       */
+/*   Updated: 2019/03/29 16:15:33 by acolas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,14 @@ void	*validate_room(char *str, t_list *head, int start_end)
 
 void	set_links(t_room **room_one, t_room **room_two)
 {
-
+	if ((*room_one)->is_start && (*room_two)->is_end)
+	put_err_msg_exit("You have a link from start to end - 1 turn needed");
+	(*room_one)->links =
+		add_to_the_end_of_list((*room_one)->links, ft_lstnew(NULL, 0));
+	last_elem((*room_one)->links)->content = *room_two;
+	(*room_two)->links =
+		add_to_the_end_of_list((*room_two)->links, ft_lstnew(NULL, 0));
+	last_elem((*room_two)->links)->content = *room_one;
 }
 
 
