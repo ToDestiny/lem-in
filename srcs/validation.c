@@ -6,7 +6,7 @@
 /*   By: acolas <acolas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/28 14:39:36 by acolas            #+#    #+#             */
-/*   Updated: 2019/03/29 16:15:33 by acolas           ###   ########.fr       */
+/*   Updated: 2019/03/29 18:03:45 by acolas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	*validate_room(char *str, t_list *head, int start_end)
 	if (count_size(info) != 3 ||
 			spec_atoi(info[1] < 0) || spec_atoi(info[2] < 0) ||
 			info[0][0] == 'L' || info[0][0] == '#' || info[0][0] == '\0')
-		put_err_msg_exit("Error: One of the room is invalid");
+		put_err_msg_exit("Error: One of the room is invalid.");
 	room = create_room(info[0],
 			spec_atoi(info[1]), spec_atoi(info[2]), start_end);
 	check_rooms(head, room);
@@ -48,7 +48,7 @@ void	*validate_room(char *str, t_list *head, int start_end)
 void	set_links(t_room **room_one, t_room **room_two)
 {
 	if ((*room_one)->is_start && (*room_two)->is_end)
-	put_err_msg_exit("You have a link from start to end - 1 turn needed");
+	put_err_msg_exit("You have a link from start to end - 1 turn needed.");
 	(*room_one)->links =
 		add_to_the_end_of_list((*room_one)->links, ft_lstnew(NULL, 0));
 	last_elem((*room_one)->links)->content = *room_two;
@@ -57,6 +57,34 @@ void	set_links(t_room **room_one, t_room **room_two)
 	last_elem((*room_two)->links)->content = *room_one;
 }
 
+void	validate_link(char *str, t_list **rooms_add)
+{
+	char	**info;
+	t_room	*room_one;
+	t_room	*room_two;
+	t_room	*room;
+	t_list	*rooms;
+
+	info = ft_strsplit(str, '-');
+	if (count_size(info) != 2)
+		put_err_msg_exit("Error: One of the links is invalid.");
+	room_one = NULL;
+	room_two = NULL;
+	rooms = *rooms_add;
+	while (rooms)
+	{
+		room = (t_room *)(rooms->content);
+		if (!ft_strcmp(room->name, info[0]))
+			room_one = room;
+		else if (!ft_strcmp(room->name, info[1]))
+			room_two = room;
+		rooms = rooms->next;
+	}
+	if (!room_two || !room_one)
+		put_err_msg_exit("Error: One of the links is invalid.");
+	set_links(&room_one, &room_two);
+	free_str_arr(info, 2);
+}
 
 void	validate(t_list *map, int params)
 {
