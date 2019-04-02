@@ -6,7 +6,7 @@
 /*   By: acolas <acolas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/27 11:46:52 by acolas            #+#    #+#             */
-/*   Updated: 2019/04/02 13:17:43 by acolas           ###   ########.fr       */
+/*   Updated: 2019/04/02 13:30:31 by acolas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,14 +33,14 @@ typedef	struct 		s_link
 {
 		t_room			*r1;
 		t_room			*r2;
-};					t_link;
+}					t_link;
 
 typedef	struct 		s_ant
 {
 		int				ant;
 		int				end;
 		t_list			*path;
-};					t_ant;
+}					t_ant;
 
 
 int				ft_printf(const char *fm, ...);
