@@ -6,7 +6,7 @@
 /*   By: acolas <acolas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 11:31:20 by acolas            #+#    #+#             */
-/*   Updated: 2019/04/02 12:45:23 by acolas           ###   ########.fr       */
+/*   Updated: 2019/04/02 12:53:33 by acolas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,5 +51,38 @@ void	add_rooms_and_links(t_list *map, t_list **rooms)
 
 t_list	*create_ants(int num_of_ants)
 {
+	t_list	*head;
+	t_ant	*ant;
+	t_list	*new;
 
+	head = NULL;
+	while (num_of_ants)
+	{
+		ant = (t_ant *)malloc(sizeof(t_ant));
+		ant->ant = num_of_ants;
+		ant->path = NULL;
+		ant->end = 0;
+		new_ft_lstnew(NULL, 0);
+		new->content = ant;
+		ft_lstadd(&head, new);
+		num_of_ants--;
+	}
+	return (head);
+}
+
+t_room	*create_room(char *name, int x, int y, int start_end)
+{
+	t_room	*room;
+
+	room = (t_room *)malloc(sizeof(t_room));
+	room->x = x;
+	room->y = y;
+	room->name = ft_strdup(name);
+	room->is_start = (start_end == 1 ? 1 : 0);
+	room->is_end = (start_end == 2 ? 1 : 0);
+	room->from = NULL;
+	room->is_visited = 0;
+	room->is_closed = 0;
+	room->ant = 0;
+	return (room);
 }
