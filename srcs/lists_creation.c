@@ -6,7 +6,7 @@
 /*   By: acolas <acolas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 11:31:20 by acolas            #+#    #+#             */
-/*   Updated: 2019/04/02 11:51:40 by acolas           ###   ########.fr       */
+/*   Updated: 2019/04/02 12:45:23 by acolas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,4 +33,23 @@ void	parsing_map_info(char **map_content, int *commands_num, t_list **rooms, int
 		*rooms = validate_room(map_content, *rooms, *start_end);
 		*start_end ? (*start_end = 0) : *start_end;
 	}
+}
+
+void	add_rooms_and_links(t_list *map, t_list **rooms)
+{
+	int	start_end;
+	int	commands_num;
+
+	start_end = 0;
+	commands_num = 0;
+	while (map)
+	{
+		parsing_map_info(map->content, &command_num, rooms, &start_end);
+		map = map->next;
+	}
+}
+
+t_list	*create_ants(int num_of_ants)
+{
+
 }
