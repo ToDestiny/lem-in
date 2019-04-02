@@ -6,24 +6,31 @@
 /*   By: acolas <acolas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 11:31:20 by acolas            #+#    #+#             */
-/*   Updated: 2019/04/02 11:39:33 by acolas           ###   ########.fr       */
+/*   Updated: 2019/04/02 11:51:40 by acolas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-int	parse_params(char **av)
+void	parsing_map_info(char **map_content, int *commands_num, t_list **rooms, int *start_end)
 {
-	if (!av)
-		return (0);
-	if (!ft_strcmp(av[1], "--leaks"))
-		return (1);
-	else if (!ft_strcmp(av[1], "--silent"))
-		return (2);
-	else if(!ft_strcmp(av[1], "--paths"))
-		return (3);
-	else if (!ft_strcmp(av[1], "--moves"))
-		return (4);
+	if (!ft_strncmp(map_content, "##start", 7) && ++(*commands_num))
+		*start_end = 1;
+	else if (!ft_strncmp(map_content, "##end", 5) && ++(commands_num))
+		*start_end = 2;
+	else if (!ft_strncmp(map_content, "##", 2))
+		;
+	else if (ft_strchr(map_content, '-') && !rooms)
+		put_err_msg_exit("Error, You added a link before a room");
+	else if (ft_strchr(map_content, '-') && rooms)
+		validate_link(map_content, rooms);
+	else if (!ft_strncmp(map_content, "#", 1))
+		;
+	else if (*commands_num > 2)
+		put_err_msg_exit("You can pass start/end command only once");
 	else
-		return (0);	
+	{
+		*rooms = validate_room(map_content, *rooms, *start_end);
+		*start_end ? (*start_end = 0) : *start_end;
+	}
 }
