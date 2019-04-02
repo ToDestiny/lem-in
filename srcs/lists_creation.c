@@ -6,7 +6,7 @@
 /*   By: acolas <acolas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 11:31:20 by acolas            #+#    #+#             */
-/*   Updated: 2019/04/02 12:53:33 by acolas           ###   ########.fr       */
+/*   Updated: 2019/04/02 13:26:25 by acolas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	add_rooms_and_links(t_list *map, t_list **rooms)
 	commands_num = 0;
 	while (map)
 	{
-		parsing_map_info(map->content, &command_num, rooms, &start_end);
+		parsing_map_info(map->content, &commands_num, rooms, &start_end);
 		map = map->next;
 	}
 }

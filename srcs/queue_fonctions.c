@@ -6,7 +6,7 @@
 /*   By: acolas <acolas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 12:55:17 by acolas            #+#    #+#             */
-/*   Updated: 2019/04/02 13:14:17 by acolas           ###   ########.fr       */
+/*   Updated: 2019/04/02 13:18:38 by acolas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void		save_path(t_room *node, t_list **paths)
 
 	while (node)
 	{
-		new _ft_lstnew(NULL, 0);
+		new = ft_lstnew(NULL, 0);
 		new->content = node;
 		ft_lstadd(&path, new);
 		node = node->from;
