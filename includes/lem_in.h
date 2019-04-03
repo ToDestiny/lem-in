@@ -6,7 +6,7 @@
 /*   By: acolas <acolas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/27 11:46:52 by acolas            #+#    #+#             */
-/*   Updated: 2019/04/02 13:45:02 by acolas           ###   ########.fr       */
+/*   Updated: 2019/04/03 16:32:58 by acolas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,5 +58,10 @@ t_list			*last_elem(t_list *head);
 void			save_path(t_room *node, t_list **paths);
 void			free_queue(t_list **queue);
 void			add_to_queue(t_list **queue, t_room *node, t_list **paths);
+void			make_move(t_ant **ant);
+t_list			*give_path(t_list *paths, int sum, int on_start, int prev);
+int				all_with_paths(t_list **ants);
+int				move(t_list *ants, t_list *paths, int num_of_ants);
+void			give_paths(t_list **ants, t_list *paths, int on_start);
 
 #endif
