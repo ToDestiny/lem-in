@@ -6,7 +6,7 @@
 /*   By: acolas <acolas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/27 11:46:52 by acolas            #+#    #+#             */
-/*   Updated: 2019/04/03 16:32:58 by acolas           ###   ########.fr       */
+/*   Updated: 2019/04/04 14:32:39 by acolas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,5 +63,10 @@ t_list			*give_path(t_list *paths, int sum, int on_start, int prev);
 int				all_with_paths(t_list **ants);
 int				move(t_list *ants, t_list *paths, int num_of_ants);
 void			give_paths(t_list **ants, t_list *paths, int on_start);
+t_list			*algorithm(t_list **rooms);
+t_list			*give_start_room(t_list	**rooms);
+int				contains(t_list *path, t_room *node);
+void			clear_rooms(t_list **rooms, t_list *path);
+t_list			bfs(t_list **rooms);
 
 #endif
