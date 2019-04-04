@@ -6,11 +6,11 @@
 /*   By: acolas <acolas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/27 11:49:55 by acolas            #+#    #+#             */
-/*   Updated: 2019/03/28 14:41:00 by acolas           ###   ########.fr       */
+/*   Updated: 2019/04/04 15:14:23 by acolas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lem_in.h"
+#include "../includes/lem_in.h"
 
 int		parse_params(char **av)
 {
@@ -35,7 +35,7 @@ t_list	*add_to_the_end_of_list(t_list *head, t_list *new)
 	crawler = head;
 	if (!crawler)
 		return (new);
-	while (crawler = crawler->next)
+	while (crawler->next)
 		crawler = crawler->next;
 	crawler->next = new;
 	return (head);

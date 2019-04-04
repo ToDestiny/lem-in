@@ -6,7 +6,7 @@
 /*   By: acolas <acolas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/27 11:46:52 by acolas            #+#    #+#             */
-/*   Updated: 2019/04/04 14:32:39 by acolas           ###   ########.fr       */
+/*   Updated: 2019/04/04 15:58:08 by acolas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,11 @@
 # define LEMIN_H
 # include "../libft/libft.h"
 # define ERROR_ROOMS "Error: Invalid map (more than one start/end, etc..)"
+# define MAG "\x1B[35m"
+# define RED "\x1B[31m"
+# define GRN "\x1B[32m"
+# define CYN "\x1B[36m"
+# define RESET "\x1B[0m"
 
 typedef struct 		s_room
 {
@@ -42,8 +47,21 @@ typedef	struct 		s_ant
 		t_list			*path;
 }					t_ant;
 
+typedef struct 		s_stack
+{
+	int				data;
+	struct s_stack	*next;
+}					t_stack;
+
+typedef	struct		s_coord
+{
+	int				x;
+	int				y;
+	struct s_coord	*next;
+}					t_coord;
 
 int				ft_printf(const char *fm, ...);
+int				get_next_line(const int fd, char **line);
 t_list			*add_to_the_end_of_list(t_list *head, t_list *new);
 int				parse_params(char **av);
 void			validate(t_list *map, int params);
@@ -67,6 +85,15 @@ t_list			*algorithm(t_list **rooms);
 t_list			*give_start_room(t_list	**rooms);
 int				contains(t_list *path, t_room *node);
 void			clear_rooms(t_list **rooms, t_list *path);
-t_list			bfs(t_list **rooms);
+t_list			*bfs(t_list **rooms);
+int				list_count(t_list *list);
+int				spec_atoi(const char *str);
+void			check_for_add_sym(char *str);
+int				count_size(char **arr);
+void			free_str_arr(char **arr, int size);
+void			put_err_msg_exit(char *str);
+int				str_arr_count(char **arr);
+void			is_sorted(t_stack *stack);
+void			free_list(t_stack **stack);
 
 #endif

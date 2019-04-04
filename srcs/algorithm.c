@@ -6,7 +6,7 @@
 /*   By: acolas <acolas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/03 17:43:03 by acolas            #+#    #+#             */
-/*   Updated: 2019/04/04 14:32:14 by acolas           ###   ########.fr       */
+/*   Updated: 2019/04/04 16:05:48 by acolas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ t_list		*give_start_room(t_list	**rooms)
 	t_list	*new;
 
 	crawler = rooms;
-	while (cralwer)
+	while (crawler)
 	{
 		room = (t_room *)crawler->content;
 		if (room->is_start)
@@ -50,6 +50,9 @@ t_list		*give_start_room(t_list	**rooms)
 
 int			contains(t_list *path, t_room *node)
 {
+	t_room	*room;
+	t_list	*crawler;
+	
 	while (path)
 	{
 		crawler = path->content;
@@ -83,7 +86,7 @@ void		clear_rooms(t_list **rooms, t_list *path)
 	}
 }
 
-t_list		bfs(t_list **rooms)
+t_list		*bfs(t_list **rooms)
 {
 	t_list	*queue;
 	t_room	*node;
