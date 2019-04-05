@@ -6,7 +6,7 @@
 /*   By: acolas <acolas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 15:40:54 by acolas            #+#    #+#             */
-/*   Updated: 2019/04/04 15:53:22 by acolas           ###   ########.fr       */
+/*   Updated: 2019/04/05 12:10:40 by acolas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,8 @@ int			spec_atoi(const char *str)
 int			list_count(t_list *list)
 {
 	int		count;
+
+	count = 0;
 	while (list)
 	{
 		count++;

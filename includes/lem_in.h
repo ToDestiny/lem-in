@@ -6,7 +6,7 @@
 /*   By: acolas <acolas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/27 11:46:52 by acolas            #+#    #+#             */
-/*   Updated: 2019/04/05 11:46:48 by acolas           ###   ########.fr       */
+/*   Updated: 2019/04/05 17:10:08 by acolas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,5 +101,9 @@ void			refresh(t_list	**tmp, int *sum, int *prev, t_list **paths);
 void			switch_params(int	params, t_list	*map, t_list *paths);
 void			print_map(t_list *map);
 int				print_paths(t_list	*tmp_paths);
+void			free_paths(t_list **paths);
+void			free_rooms(t_list **rooms);
+void			clean(t_list **rooms, t_list **ants, t_list **paths);
+
 
 #endif

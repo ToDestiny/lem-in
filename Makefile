@@ -6,7 +6,7 @@
 #    By: acolas <acolas@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/01/07 16:54:15 by acolas            #+#    #+#              #
-#    Updated: 2019/04/04 15:59:02 by acolas           ###   ########.fr        #
+#    Updated: 2019/04/05 17:12:05 by acolas           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,6 +18,7 @@ SRCS = srcs/main.c \
 	srcs/moving_ants.c \
 	srcs/queue_functions.c \
 	srcs/validation.c \
+	srcs/memory_cleaning.c \
 	srcs/functions1.c \
 	srcs/functions2.c \
 

@@ -6,11 +6,13 @@
 /*   By: acolas <acolas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/28 14:39:36 by acolas            #+#    #+#             */
-/*   Updated: 2019/04/05 11:53:24 by acolas           ###   ########.fr       */
+/*   Updated: 2019/04/05 17:09:54 by acolas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lem_in.h"
+
+void			clean(t_list **rooms, t_list **ants, t_list **paths);
 
 void	check_rooms(t_list *rooms, t_room *to_find)
 {
