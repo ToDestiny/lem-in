@@ -6,13 +6,13 @@
 /*   By: acolas <acolas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 11:31:20 by acolas            #+#    #+#             */
-/*   Updated: 2019/04/02 13:45:03 by acolas           ###   ########.fr       */
+/*   Updated: 2019/04/05 10:46:35 by acolas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-void	parsing_map_info(char **map_content, int *commands_num, t_list **rooms, int *start_end)
+void	parsing_map_info(char *map_content, int *commands_num, t_list **rooms, int *start_end)
 {
 	if (!ft_strncmp(map_content, "##start", 7) && ++(*commands_num))
 		*start_end = 1;

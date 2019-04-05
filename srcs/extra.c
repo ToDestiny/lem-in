@@ -6,7 +6,7 @@
 /*   By: acolas <acolas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 14:45:39 by acolas            #+#    #+#             */
-/*   Updated: 2019/04/04 15:10:00 by acolas           ###   ########.fr       */
+/*   Updated: 2019/04/05 10:44:53 by acolas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void		refresh(t_list	**tmp, int *sum, int *prev, t_list **paths)
 	*prev = 0;
 }
 
-void		swith_params(int	params, t_list	*map, t_list *paths)
+void		switch_params(int	params, t_list	*map, t_list *paths)
 {
 	if (!paths)
 		put_err_msg_exit("There is no paths for this map");

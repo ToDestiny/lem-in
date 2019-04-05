@@ -6,7 +6,7 @@
 /*   By: acolas <acolas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/03 17:43:03 by acolas            #+#    #+#             */
-/*   Updated: 2019/04/04 16:05:48 by acolas           ###   ########.fr       */
+/*   Updated: 2019/04/05 10:41:42 by acolas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ t_list		*algorithm(t_list **rooms)
 		solution = add_to_the_end_of_list(solution, tmp_paths);
 		clear_rooms(rooms, solution);
 	}
+	return (solution);
 }
 
 t_list		*give_start_room(t_list	**rooms)
@@ -33,7 +34,7 @@ t_list		*give_start_room(t_list	**rooms)
 	t_room	*room;
 	t_list	*new;
 
-	crawler = rooms;
+	crawler = *rooms;
 	while (crawler)
 	{
 		room = (t_room *)crawler->content;
