@@ -6,7 +6,7 @@
 /*   By: acolas <acolas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 11:31:20 by acolas            #+#    #+#             */
-/*   Updated: 2019/04/05 10:46:35 by acolas           ###   ########.fr       */
+/*   Updated: 2019/04/05 11:30:43 by acolas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ t_list	*create_ants(int num_of_ants)
 		ant->ant = num_of_ants;
 		ant->path = NULL;
 		ant->end = 0;
-		new_ft_lstnew(NULL, 0);
+		new = ft_lstnew(NULL, 0);
 		new->content = ant;
 		ft_lstadd(&head, new);
 		num_of_ants--;

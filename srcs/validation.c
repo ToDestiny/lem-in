@@ -6,7 +6,7 @@
 /*   By: acolas <acolas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/28 14:39:36 by acolas            #+#    #+#             */
-/*   Updated: 2019/04/03 15:47:58 by acolas           ###   ########.fr       */
+/*   Updated: 2019/04/05 11:53:24 by acolas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,18 +21,19 @@ void	check_rooms(t_list *rooms, t_room *to_find)
 		room = rooms->content;
 		if (!ft_strcmp(room->name, to_find->name))
 			put_err_msg_exit("Rooms can't have same names");
+		rooms = rooms->next;
 	}
 }
 
 void	*validate_room(char *str, t_list *head, int start_end)
 {
 	char	**info;
-	t_room	**room;
+	t_room	*room;
 	t_list	*new;
 
 	info = ft_strsplit(str, ' ');
 	if (count_size(info) != 3 ||
-			spec_atoi(info[1] < 0) || spec_atoi(info[2] < 0) ||
+			spec_atoi(info[1]) < 0 || spec_atoi(info[2]) < 0 ||
 			info[0][0] == 'L' || info[0][0] == '#' || info[0][0] == '\0')
 		put_err_msg_exit("Error: One of the room is invalid.");
 	room = create_room(info[0],

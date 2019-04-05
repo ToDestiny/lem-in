@@ -6,7 +6,7 @@
 /*   By: acolas <acolas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 12:55:17 by acolas            #+#    #+#             */
-/*   Updated: 2019/04/04 15:40:08 by acolas           ###   ########.fr       */
+/*   Updated: 2019/04/05 11:32:01 by acolas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ void		add_to_queue(t_list **queue, t_room *node, t_list **paths)
 	{
 		each = ft_lstnew(NULL, 0);
 		each->content = links->content;
+		room = each->content;
 		if (!(room->is_visited + room->is_start))
 		{
 			room->from = node;
