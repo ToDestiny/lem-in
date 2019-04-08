@@ -6,7 +6,7 @@
 /*   By: acolas <acolas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/03 14:57:16 by acolas            #+#    #+#             */
-/*   Updated: 2019/04/03 16:33:03 by acolas           ###   ########.fr       */
+/*   Updated: 2019/04/08 14:52:41 by acolas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ t_list	*give_path(t_list *paths, int sum, int on_start, int prev)
 	t_list	*min;
 
 	min = NULL;
-	if(((list_count(paths) - 1) * prev) - sum <on_start)
+	if(((list_count(paths) - 1) * prev) - sum < on_start)
 		min = paths;
 	return (min);
 }

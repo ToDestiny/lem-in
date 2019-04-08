@@ -6,108 +6,111 @@
 /*   By: acolas <acolas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/03 17:43:03 by acolas            #+#    #+#             */
-/*   Updated: 2019/04/05 10:41:42 by acolas           ###   ########.fr       */
+/*   Updated: 2019/04/08 16:17:11 by acolas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lem_in.h"
 
-t_list		*algorithm(t_list **rooms)
+static int8_t	lem_queue(t_rooms *queue, t_room *room, int visit)
 {
-	t_list	*path;
-	t_list	*tmp_paths;
-	t_list	*solution;
+	size_t	i;
+	t_room	*link;
 
-	solution = NULL;
-	while ((path = bfs(rooms)))
+	i = -1;
+	while (++i < room->crossroad->len)
 	{
-		tmp_paths = path;
-		solution = add_to_the_end_of_list(solution, tmp_paths);
-		clear_rooms(rooms, solution);
-	}
-	return (solution);
-}
-
-t_list		*give_start_room(t_list	**rooms)
-{
-	t_list	*crawler;
-	t_room	*room;
-	t_list	*new;
-
-	crawler = *rooms;
-	while (crawler)
-	{
-		room = (t_room *)crawler->content;
-		if (room->is_start)
-		{
-			new = ft_lstnew(NULL, 0);
-			new->content = crawler->content;
-			return (new);
-		}
-		crawler = crawler->next;
-	}
-	return (NULL);
-}
-
-int			contains(t_list *path, t_room *node)
-{
-	t_room	*room;
-	t_list	*crawler;
-	
-	while (path)
-	{
-		crawler = path->content;
-		while (crawler)
-		{
-			room = crawler->content;
-			if (room == node)
-				return (1);
-			crawler = crawler->next;
-		}
-		path = path->next;
+		link = room->crossroad->room[i];
+		if (link->mark & (end | closed) || link->visit == visit)
+			continue;
+		link->parent = room;
+		if (link->mark & start)
+			return (1);
+		link->visit = visit;
+		ft_array_push(queue, link);
 	}
 	return (0);
 }
 
-void		clear_rooms(t_list **rooms, t_list *path)
+static int8_t	lem_bfs(void)
 {
-	t_list	*crawler;
-	t_room	*room;
+	static int	bfs = 1;
+	size_t		i;
+	t_rooms		*queue;
 
-	crawler = *rooms;
-	while (crawler)
-	{
-		room = crawler->content;
-		if (!room->is_start && !room->is_end &&contains(path, room))
-			room->is_closed = 1;
-		else
-			room->is_closed = 0;
-		room->is_visited = 0;
-		crawler = crawler->next;
-	}
+	bfs++;
+	lem_queue((queue = ft_array(g_l.rooms->len)), g_l.end, bfs);
+	i = -1;
+	while (++i < queue->len)
+		if (lem_queue(queue, queue->room[i], bfs))
+			break ;
+	ft_array_free(queue);
+	if (g_l.start->parent)
+		return (1);
+	return (0);
 }
 
-t_list		*bfs(t_list **rooms)
+static size_t	paths_efficiency(void)
 {
-	t_list	*queue;
-	t_room	*node;
-	t_list	*new_paths;
-	t_list	*to_free;
+	size_t	i;
+	size_t	steps;
+	size_t	ants;
 
-	queue = give_start_room(rooms);
-	new_paths = NULL;
-	while (queue)
+	ants = 0;
+	steps = 0;
+	while (ants < g_l.ants_count)
 	{
-		node = (t_room *)queue->content;
-		to_free = queue;
-		queue = queue->next;
-		free(to_free);
-		add_to_queue(&queue, node, &new_paths);
-		if (new_paths)
+		steps++;
+		i = -1;
+		while (++i < g_l.paths->len)
+			if (g_l.paths->path[i]->len - 2 < steps)
+				ants++;
+	}
+	return (steps);
+}
+
+static int8_t	save_path(void)
+{
+	t_room	*room;
+	t_rooms	*path;
+
+	path = ft_array(1);
+	room = g_l.start;
+	while (room)
+	{
+		ft_array_push(path, room);
+		if (!(room->mark & (start | end)))
+			room->mark |= closed;
+		room = room->parent;
+	}
+	g_l.start->parent = 0;
+	ft_array_push(g_l.paths, path);
+	if (path->room[1]->mark & end)
+		return (1);
+	return (0);
+}
+
+void			lem_path(void)
+{
+	size_t	efficiency;
+
+	g_l.efficiency = -1;
+	g_l.paths = ft_array(1);
+	while (lem_bfs())
+	{
+		if (save_path())
 		{
-			free_queue(&queue);
-			break;
+			g_l.efficiency = 1;
+			break ;
+		}
+		if (g_l.efficiency > (efficiency = paths_efficiency()))
+			g_l.efficiency = efficiency;
+		else
+		{
+			g_l.paths->len--;
+			break ;
 		}
 	}
-	return (new_paths);
+	if (g_l.o & show_paths)
+		print_paths();
 }

@@ -6,59 +6,102 @@
 /*   By: acolas <acolas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/27 11:49:55 by acolas            #+#    #+#             */
-/*   Updated: 2019/04/04 15:14:23 by acolas           ###   ########.fr       */
+/*   Updated: 2019/04/08 16:16:14 by acolas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lem_in.h"
 
-int		parse_params(char **av)
+char	g_buff[256];
+size_t	g_i;
+size_t	g_size;
+size_t	g_line;
+
+static void	len_find_ln(char *buff)
 {
-	if (!av[1])
-		return (0);
-	if (!ft_strcmp(av[1], "--leaks"))
-		return (1);
-	else if (!ft_strcmp(av[1], "--silent"))
-		return (2);
-	else if (!ft_strcmp(av[1], "--paths"))
-		return (3);
-	else if (!ft_strcmp(av[1], "--moves"))
-		return (4);
-	else
-		return (0);
+	while (buff[g_i] && buff[g_i] != '\n')
+		g_i++;
+	buff[g_i] = 0;
 }
 
-t_list	*add_to_the_end_of_list(t_list *head, t_list *new)
+char		*lem_gnl(void)
 {
-	t_list	*crawler;
+	size_t	n;
+	char	*res;
 
-	crawler = head;
-	if (!crawler)
-		return (new);
-	while (crawler->next)
-		crawler = crawler->next;
-	crawler->next = new;
-	return (head);
-}
-
-int		main(int ac, char **av)
-{
-	char	*line;
-	t_list	*map;
-	t_list	*new;
-	int		params;
-
-	while (get_next_line(0, &line) > 0)
+	res = 0;
+	if (++g_i < g_size)
 	{
-		new = ft_lstnew(NULL, 0);
-		new->content = line;
-		map = add_to_the_end_of_list(map, new);
+		n = g_i;
+		len_find_ln(g_buff);
+		res = ft_strjoin(res, g_buff + n);
 	}
-	ac ? (params = parse_params(av)) :
-		(params = 0);
-	if (!map)
-		put_err_msg_exit("Usage: You need to give a valid map.");
-	validate(map, params);
-	if (params == 1)
-		system("leaks lem-in");
+	if (g_i >= g_size)
+		while ((g_size = read(0, g_buff, 255)))
+		{
+			g_i = 0;
+			g_buff[g_size] = 0;
+			len_find_ln(g_buff);
+			res = ft_strfjoin(res, g_buff, 1);
+			if (g_i < g_size)
+				break ;
+		}
+	res ? g_line++ : (g_line = 0);
+	ft_array_push(g_l.map, res);
+	return (res);
+}
+
+void		lem_error(char *msg)
+{
+	if (!(g_l.o & error_management))
+		ft_dprintf(2, "ERROR\n");
+	else if (g_line)
+		ft_dprintf(2, "%s: Error line %D: %s\n", g_process.name, g_line, msg);
+	else
+		ft_dprintf(2, "%s: Error: %s\n", g_process.name, msg);
+	free(msg);
+	W("\e[91m");
+	system("leaks -q lem-in");
+	exit(0);
+}
+
+static void	len_statistic(void)
+{
+	ft_separator("\n");
+	W(COLOR("3;94;1", "Statistic:\n"));
+	W(COLOR("1", "    Ants:  %U\n"), g_l.ants_count);
+	W(COLOR("1", "    Rooms: %U\n"), g_l.rooms->len);
+	W(COLOR("1", "    Paths: %U\n"), g_l.paths->len);
+	W(COLOR("1", "    Steps: %U"), g_l.efficiency);
+	if (g_l.best_steps > 0)
+		W(COLOR("1", " vs. %U"), g_l.best_steps);
+	W("\n");
+}
+
+int			main(int argc, char **argv)
+{
+	FT_INIT(MLC_ERROR | MLC_EXIT);
+	lem_options();
+	lem_parse();
+	if (!(g_l.o & quiet_mode))
+	{
+		ft_separator("\n");
+		ft_print_strary(g_l.map->line);
+	}
+	lem_deadlocks();
+	lem_full_bfs();
+	lem_tunnels();
+	if (g_l.o & show_rooms)
+		print_rooms();
+	lem_path();
+	if (g_l.efficiency == 1)
+		lem_start_end_case();
+	else
+		lem_ants_creator();
+	if (g_l.o & show_statistic)
+		len_statistic();
+	ft_free_strary(g_l.map->line);
+	W("\e[91m");
+	system("leaks -q lem-in");
+	return (0);
 }

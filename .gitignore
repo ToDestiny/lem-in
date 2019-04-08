@@ -1,6 +1,7 @@
 settings.json
 *.o
 *.a
+*.map
 c_cpp_properties.json
 .vscode
 .DS_Store
