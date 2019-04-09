@@ -6,7 +6,7 @@
 #    By: acolas <acolas@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/01/07 16:54:15 by acolas            #+#    #+#              #
-#    Updated: 2019/04/05 17:12:05 by acolas           ###   ########.fr        #
+#    Updated: 2019/04/09 15:42:26 by acolas           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = lem-in
 SRCS = srcs/main.c \
 	srcs/algorithm.c \
 	srcs/extra.c \
-	srcs/lists_creation.c \
+	srcs/parsingc \
 	srcs/moving_ants.c \
 	srcs/queue_functions.c \
 	srcs/validation.c \
@@ -32,20 +32,20 @@ CFLAGS = -Wall -Wextra -Werror
 all : $(NAME)
 
 $(NAME) : $(OBJS) libft/libft.a  
-		$(CC) $(CFLAGS) -Llibft -lft $^ -o $@
+		@$(CC) $(CFLAGS) -Llibft -lft $^ -o $@
 
 %.o: %.c
-	    $(CC) $(CFLAGS) $(INCLUDES) -c $^ -o $@
+	    @$(CC) $(CFLAGS) $(INCLUDES) -c $^ -o $@
 
 libft/libft.a:
-		make -C libft
+		@make -C libft
 
 clean :
-		make -C libft clean
-		rm -rf $(OBJS)
+		@make -C libft clean
+		@rm -rf $(OBJS)
 
 fclean : clean
-		make -C libft fclean
-		rm -rf $(NAME)
+		@make -C libft fclean
+		@rm -rf $(NAME)
 
 re : fclean all
