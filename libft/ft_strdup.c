@@ -22,3 +22,19 @@ char	*ft_strdup(const char *s1)
 		ft_strcpy(copy, s1);
 	return (copy);
 }
+
+char	*ft_strndup(char *str, size_t n)
+{
+	size_t	len;
+	char	*res;
+
+	if (!str || !n)
+		return ((!str) ? 0 : ft_memalloc(sizeof(char)));
+	len = ft_strlen(str);
+	if (len < n)
+		n = len;
+	if (!(res = ft_memcpy(ft_mlc(SIZE(char, n + 1)), str, n)))
+		return (0);
+	res[n] = '\0';
+	return (res);
+}

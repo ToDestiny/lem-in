@@ -6,7 +6,7 @@
 #    By: acolas <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/04/24 14:27:26 by acolas            #+#    #+#              #
-#    Updated: 2019/02/04 23:55:41 by acolas           ###   ########.fr        #
+#    Updated: 2019/04/10 17:54:58 by acolas           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -72,8 +72,10 @@ SRC = ft_putchar.c \
 	  ft_lstdelone.c \
 	  ft_iterative_power.c \
 	  ft_iterative_factorial.c \
+	  ft_intlen.c \
 	  ft_sqrt.c \
 	  ft_is_prime.c \
+	  ft_isnumeric.c \
 	  ft_lstdelone.c \
 	  ft_lstdel.c \
 	  ft_lstadd.c \
@@ -81,15 +83,20 @@ SRC = ft_putchar.c \
 	  ft_lstmap.c \
 	  get_next_line.c \
 	  ft_free_arr.c \
-	  parse_arguments.c \
-	  handle_strings.c \
-	  handle_numbers.c \
-	  bonus_functions.c \
 	  ft_printf.c \
+	  ft_match.c \
+	  ft_number.c \
+	  ft_parse.c \
+	  ft_simple.c \
+	  ft_tools.c \
 	  ft_strchri.c \
-	  ft_wstrlen.c \
-	  ft_wcharlen.c \
 	  ft_pow.c \
+	  ft_process.c \
+	  ft_other.c \
+	  ft_print_memory.c \
+	  ft_int_to_str.c \
+	  ft_unicode.c \
+	  ft_array.c \
 
 INC = -I includes/
 

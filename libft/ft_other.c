@@ -1,24 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_wcharlen.c                                      :+:      :+:    :+:   */
+/*   ft_other.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bsouchet <bsouchet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: acolas <acolas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/05/03 22:30:13 by bsouchet          #+#    #+#             */
-/*   Updated: 2017/05/05 23:43:19 by bsouchet         ###   ########.fr       */
+/*   Created: 2019/04/10 18:31:17 by acolas            #+#    #+#             */
+/*   Updated: 2019/04/10 18:31:44 by acolas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	ft_wcharlen(unsigned wc)
+void	ft_separator(char *str)
 {
-	if (wc < 0x80)
-		return (1);
-	else if (wc < 0x800)
-		return (2);
-	else if (wc < 0x10000)
-		return (3);
-	return (4);
+	static int8_t	i;
+
+	if (i)
+		W(str);
+	else
+		i = 1;
 }

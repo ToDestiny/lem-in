@@ -72,3 +72,16 @@ char		**ft_strsplit(char const *s, char c)
 	}
 	return (tab);
 }
+
+
+void		ft_free_strary(char **strary)
+{
+	char **tmp;
+
+	tmp = strary;
+	if (!strary)
+		return ;
+	while (*strary)
+		free(*strary++);
+	free(tmp);
+}

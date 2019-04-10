@@ -6,15 +6,15 @@
 /*   By: acolas <acolas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/27 11:46:52 by acolas            #+#    #+#             */
-/*   Updated: 2019/04/09 15:37:09 by acolas           ###   ########.fr       */
+/*   Updated: 2019/04/10 19:15:26 by acolas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LEM_IN_H
 # define LEM_IN_H
 
-# include "lib/libft.h"
-# include "options.h"
+# include "../libft/libft.h"
+# include "extra.h"
 
 # define E lem_error
 # define RT room_type
@@ -128,8 +128,5 @@ void	print_room(t_room *room);
 void	print_rooms(void);
 void	print_path(t_rooms *path);
 void	print_paths(void);
-
-#endif
-
 
 #endif

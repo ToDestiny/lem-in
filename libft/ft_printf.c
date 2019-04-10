@@ -3,112 +3,67 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bsouchet <bsouchet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: acolas <acolas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/05/03 21:39:39 by bsouchet          #+#    #+#             */
-/*   Updated: 2017/05/06 01:40:37 by bsouchet         ###   ########.fr       */
+/*   Created: 2019/02/19 12:40:22 by ybereshc          #+#    #+#             */
+/*   Updated: 2019/04/10 19:11:32 by acolas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "ft_parse.h"
 
-int		ft_printf(const char *format, ...)
+ssize_t		ft_printf(char *format, ...)
 {
-	t_printf	p;
-
-	ft_bzero(&p, sizeof(p));
-	p.fd = 1;
-	p.format = (char *)format;
-	va_start(p.ap, format);
-	while (*p.format)
-	{
-		if (*p.format == '%')
-		{
-			++p.format;
-			if (!*p.format)
-				break ;
-			parse_optionals(&p);
-		}
-		else
-			buffer(&p, p.format, 1);
-		++p.format;
-	}
-	write(p.fd, p.buff, p.buffer_index);
-	va_end(p.ap);
-	return (p.len);
+	if (!format || !*format)
+		return (!format ? -1 : 0);
+	g_p.fd = 1;
+	g_func = &push;
+	va_start(g_ap, format);
+	str_format(format);
+	va_end(g_ap);
+	if (g_p.i)
+		write(g_p.fd, g_p.buff, g_p.i);
+	return (g_p.len);
 }
 
-int		ft_dprintf(int fd, const char *format, ...)
+ssize_t		ft_dprintf(int fd, char *format, ...)
 {
-	t_printf	p;
-
-	ft_bzero(&p, sizeof(p));
-	p.fd = fd;
-	p.format = (char *)format;
-	va_start(p.ap, format);
-	while (*p.format)
-	{
-		if (*p.format == '%')
-		{
-			++p.format;
-			if (!*p.format)
-				break ;
-			parse_optionals(&p);
-		}
-		else
-			buffer(&p, p.format, 1);
-		++p.format;
-	}
-	write(p.fd, p.buff, p.buffer_index);
-	va_end(p.ap);
-	return (p.len);
+	if (!format || !*format || fd < 0)
+		return ((!format || fd < 0) ? -1 : 0);
+	g_p.fd = fd;
+	g_func = &push;
+	va_start(g_ap, format);
+	str_format(format);
+	va_end(g_ap);
+	if (g_p.i)
+		write(g_p.fd, g_p.buff, g_p.i);
+	return (g_p.len);
 }
 
-void	buffer(t_printf *p, void *new, size_t size)
+char		*ft_format(char *format, ...)
 {
-	int			diff;
-	long long	new_i;
+	char	*res;
 
-	new_i = 0;
-	while (PF_BUF_SIZE - p->buffer_index < (int)size)
-	{
-		diff = PF_BUF_SIZE - p->buffer_index;
-		ft_memcpy(&(p->buff[p->buffer_index]), &(new[new_i]), diff);
-		size -= diff;
-		new_i += diff;
-		p->buffer_index += diff;
-		p->len += diff;
-		write(p->fd, p->buff, p->buffer_index);
-		p->buffer_index = 0;
-	}
-	ft_memcpy(&(p->buff[p->buffer_index]), &(new[new_i]), size);
-	p->buffer_index += size;
-	p->len += size;
+	if (!format)
+		return (0);
+	res = 0;
+	g_p.dest = &res;
+	g_func = &form;
+	va_start(g_ap, format);
+	str_format(format);
+	va_end(g_ap);
+	return (res);
 }
 
-void	print_pointer_address(t_printf *p)
+ssize_t		ft_sformat(char **dest, char *format, ...)
 {
-	void	*pointer;
-
-	pointer = va_arg(p->ap, void *);
-	p->f &= ~F_SHARP;
-	p->min_length -= (p->f & F_ZERO ? 2 : 0);
-	p->padding = (p->printed > p->min_length - 3) ? 0 :
-		p->min_length - 3 - p->printed;
-	p->f |= F_SHARP;
-	p->f |= F_POINTER;
-	itoa_base_printf((uintmax_t)pointer, 16, p);
-}
-
-void	padding(t_printf *p, int n)
-{
-	if (!p->padding)
-		return ;
-	p->c = 32 | (p->f & F_ZERO);
-	if (!n && !(p->f & F_MINUS))
-		while (p->padding--)
-			buffer(p, &p->c, 1);
-	else if (n && (p->f & F_MINUS))
-		while (p->padding--)
-			buffer(p, &p->c, 1);
+	if (!dest || !format)
+		return (-1);
+	*dest = 0;
+	g_p.dest = dest;
+	g_func = &form;
+	va_start(g_ap, format);
+	str_format(format);
+	va_end(g_ap);
+	return (g_p.len);
 }

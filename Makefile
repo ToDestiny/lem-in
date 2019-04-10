@@ -6,21 +6,19 @@
 #    By: acolas <acolas@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/01/07 16:54:15 by acolas            #+#    #+#              #
-#    Updated: 2019/04/09 15:42:26 by acolas           ###   ########.fr        #
+#    Updated: 2019/04/10 19:22:04 by acolas           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = lem-in
 SRCS = srcs/main.c \
-	srcs/algorithm.c \
-	srcs/extra.c \
-	srcs/parsingc \
-	srcs/moving_ants.c \
-	srcs/queue_functions.c \
-	srcs/validation.c \
-	srcs/memory_cleaning.c \
-	srcs/functions1.c \
-	srcs/functions2.c \
+	srcs/ft_algorithm.c \
+	srcs/ft_extra.c \
+	srcs/ft_parsing.c \
+	srcs/ft_moving_ants.c \
+	srcs/ft_validate.c \
+	srcs/ft_printing.c \
+	srcs/ft_utilities.c \
 
 OBJS = $(SRCS:.c=.o)
 CC = gcc

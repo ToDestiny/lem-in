@@ -1,26 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_wstrlen.c                                       :+:      :+:    :+:   */
+/*   ft_array.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: acolas <acolas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/05/03 22:30:20 by bsouchet          #+#    #+#             */
-/*   Updated: 2019/03/27 15:45:06 by acolas           ###   ########.fr       */
+/*   Created: 2019/04/10 18:16:52 by acolas            #+#    #+#             */
+/*   Updated: 2019/04/10 18:16:54 by acolas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#ifndef FT_ARRAY_H
+# define FT_ARRAY_H
 
-size_t		ft_wstrlen(unsigned *s)
+# include "libft.h"
+
+typedef struct	s_array
 {
+	void	**ptr;
 	size_t	len;
+	size_t	max;
+}				t_array;
 
-	len = 0;
-	while (*s != L'\0')
-	{
-		len += ft_wcharlen(*s);
-		++s;
-	}
-	return (len);
-}
+#endif

@@ -1,34 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strchr.c                                        :+:      :+:    :+:   */
+/*   ft_isnumeric.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bsouchet <bsouchet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: acolas <acolas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/05/03 22:29:07 by bsouchet          #+#    #+#             */
-/*   Updated: 2017/05/03 22:29:08 by bsouchet         ###   ########.fr       */
+/*   Created: 2019/04/10 19:23:55 by acolas            #+#    #+#             */
+/*   Updated: 2019/04/10 19:23:58 by acolas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strchr(const char *s, int c)
+int8_t	ft_isnumeric(char *str)
 {
-	return (ft_memchr(s, c, ft_strlen(s) + 1));
-}
-
-size_t		ft_strchrcount(char *str, char chr)
-{
-	size_t	count;
-
-	if (!str || !chr)
+	if (!str)
 		return (0);
-	count = 0;
-	while (*str)
-	{
-		if (*str == chr)
-			count++;
+	if (*str == '-' || *str == '+')
 		str++;
-	}
-	return (count);
+	while (*str >= '0' && *str <= '9')
+		str++;
+	return (*str ? 0 : 1);
 }

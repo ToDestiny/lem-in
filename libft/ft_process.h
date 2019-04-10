@@ -1,32 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   extra.h                                            :+:      :+:    :+:   */
+/*   ft_process.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: acolas <acolas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/09 15:43:49 by acolas            #+#    #+#             */
-/*   Updated: 2019/04/10 17:40:31 by acolas           ###   ########.fr       */
+/*   Created: 2019/04/10 17:54:22 by acolas            #+#    #+#             */
+/*   Updated: 2019/04/10 18:27:09 by acolas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef OPTIONS_H
-# define OPTIONS_H
+#ifndef FT_PROCESS_H
+# define FT_PROCESS_H
 
-# define FLAGS "qprRes"
+# include "libft.h"
 
-typedef enum e_option	t_option;
+# define FT_INIT(o) ft_init(argc, argv, (o))
+# define MLC_ERROR 1
+# define MLC_EXIT 2
 
-enum	e_option
+typedef struct	s_process
 {
-	quiet_mode = 1 << 0,
-	show_paths = 1 << 1,
-	show_rooms = 1 << 2,
-	show_all_rooms = 1 << 3,
-	error_management = 1 << 4,
-	show_statistic = 1 << 5,
-};
+	char		*name;
+	char		**argv;
+	int			argc;
+	uintmax_t	options;
+}				t_process;
 
-void	lem_options();
+t_process	g_process;
 
 #endif
