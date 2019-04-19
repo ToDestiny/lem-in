@@ -6,7 +6,7 @@
 /*   By: acolas <acolas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/02 20:47:54 by acolas            #+#    #+#             */
-/*   Updated: 2019/04/15 17:01:03 by acolas           ###   ########.fr       */
+/*   Updated: 2019/04/19 14:19:23 by acolas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ char	**ft_strsplit(char *str, char chr)
 	return (res);
 }
 
-void		ft_free_strary(char **strary)
+void	ft_free_strary(char **strary)
 {
 	char **tmp;
 
@@ -50,7 +50,6 @@ void		ft_free_strary(char **strary)
 		free(*strary++);
 	free(tmp);
 }
-
 
 char	**ft_strfsplit(char *str, char chr)
 {

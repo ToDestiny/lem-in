@@ -6,12 +6,12 @@
 /*   By: acolas <acolas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/09 15:43:49 by acolas            #+#    #+#             */
-/*   Updated: 2019/04/10 17:40:31 by acolas           ###   ########.fr       */
+/*   Updated: 2019/04/19 14:13:10 by acolas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef OPTIONS_H
-# define OPTIONS_H
+#ifndef EXTRA_H
+# define EXTRA_H
 
 # define FLAGS "qprRes"
 
