@@ -3,17 +3,38 @@
 /*                                                        :::      ::::::::   */
 /*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bsouchet <bsouchet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: acolas <acolas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/03 22:28:17 by bsouchet          #+#    #+#             */
-/*   Updated: 2017/05/03 22:28:18 by bsouchet         ###   ########.fr       */
+/*   Updated: 2019/04/15 16:44:20 by acolas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_bzero(void *s, size_t n)
+static void	*ft_bzero2(void *ptr, size_t n)
 {
-	if (n)
-		ft_memset(s, 0, n);
+	uint8_t	*tmp;
+
+	tmp = (uint8_t*)ptr;
+	while (n--)
+		*tmp++ = 0;
+	return (ptr);
+}
+
+void		*ft_bzero(void *ptr, size_t n)
+{
+	BIG_PIECE	*big;
+	size_t		i;
+
+	if (!ptr)
+		return (0);
+	i = n % sizeof(BIG_PIECE);
+	n /= sizeof(BIG_PIECE);
+	big = (BIG_PIECE*)ptr;
+	while (n--)
+		*big++ = 0;
+	if (i)
+		ft_bzero2(big, i);
+	return (ptr);
 }

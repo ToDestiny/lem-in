@@ -3,52 +3,40 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bsouchet <bsouchet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: acolas <acolas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/05/03 22:28:32 by bsouchet          #+#    #+#             */
-/*   Updated: 2017/05/05 22:49:29 by bsouchet         ###   ########.fr       */
+/*   Created: 2017/05/03 22:28:32 by acolas	           #+#    #+#             */
+/*   Updated: 2019/04/15 16:47:08 by acolas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static unsigned long long	init__(unsigned long long **magic, void *cp,
-									int c)
+static void	*ft_memset2(void *ptr, uint8_t byte, size_t n)
 {
-	unsigned long long bmagic;
+	uint8_t	*tmp;
 
-	bmagic = 0xff & c;
-	bmagic = (bmagic << 8) | bmagic;
-	bmagic = (bmagic << 16) | bmagic;
-	bmagic = ((bmagic << 16) << 16) | bmagic;
-	*magic = (unsigned long long int *)cp;
-	return (bmagic);
+	tmp = (uint8_t*)ptr;
+	while (n--)
+		*tmp++ = byte;
+	return (ptr);
 }
 
-void						*ft_memset(void *mem, int c, size_t mlen)
+void		*ft_memset(void *ptr, uint8_t byte, size_t n)
 {
-	unsigned long long	bmagic;
-	unsigned long long	*magic;
-	unsigned char		*cp;
+	BIG_PIECE	*big;
+	BIG_PIECE	bytes;
+	size_t		i;
 
-	magic = NULL;
-	cp = (unsigned char *)mem;
-	while (((unsigned long long)cp & (sizeof(bmagic) - 1)) && mlen)
-	{
-		*cp++ = c;
-		--mlen;
-	}
-	if (mlen >= 8)
-	{
-		bmagic = init__(&magic, (void *)cp, c);
-		while (mlen >= 8)
-		{
-			*magic++ = bmagic;
-			mlen -= 8;
-		}
-	}
-	cp = magic == NULL ? cp : (unsigned char *)magic;
-	while (mlen--)
-		*cp++ = c;
-	return (mem);
+	if (!ptr)
+		return (0);
+	i = n % sizeof(BIG_PIECE);
+	n /= sizeof(BIG_PIECE);
+	ft_memset2(&bytes, byte, sizeof(BIG_PIECE));
+	big = (BIG_PIECE*)ptr;
+	while (n--)
+		*big++ = bytes;
+	if (i)
+		ft_memset2(big, byte, i);
+	return (ptr);
 }

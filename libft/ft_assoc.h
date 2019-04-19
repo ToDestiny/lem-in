@@ -1,40 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strequ.c                                        :+:      :+:    :+:   */
+/*   ft_assoc.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: acolas <acolas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/05/02 17:04:08 by acolas            #+#    #+#             */
-/*   Updated: 2017/05/02 17:04:10 by acolas           ###   ########.fr       */
+/*   Created: 2019/04/15 16:28:11 by acolas            #+#    #+#             */
+/*   Updated: 2019/04/15 16:28:17 by acolas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#ifndef FT_ASSOC_H
+# define FT_ASSOC_H
 
-int		ft_strequ(char const *s1, char const *s2)
+typedef struct	s_assoc
 {
-	int		i;
-	int		len1;
-	int		len2;
+	char	**key;
+	void	**ptr;
+	int		len;
+	int		max;
+}				t_assoc;
 
-	if (s1 && s2)
-	{
-		i = 0;
-		len1 = ft_strlen(s1);
-		len2 = ft_strlen(s2);
-		while (len1 > 0 || len2 > 0)
-		{
-			if (s1[i] == s2[i])
-			{
-				i++;
-				len1--;
-				len2--;
-			}
-			else
-				return (0);
-		}
-		return (1);
-	}
-	return (0);
-}
+#endif

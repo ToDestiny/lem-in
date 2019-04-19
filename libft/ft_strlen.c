@@ -3,64 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bsouchet <bsouchet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: acolas <acolas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/05/03 22:29:22 by bsouchet          #+#    #+#             */
-/*   Updated: 2017/05/03 22:29:53 by bsouchet         ###   ########.fr       */
+/*   Created: 2017/05/03 22:29:22 by acolas            #+#    #+#             */
+/*   Updated: 2019/04/15 16:56:57 by acolas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static const char	*byte_zero(const unsigned long *longword_ptr,
-	unsigned long lomagic, unsigned long himagic)
+size_t	ft_strlen(char *str)
 {
-	unsigned long			longword;
-	const char				*cp;
-	int						i;
+	char	*end;
 
-	while (1)
-	{
-		longword = *longword_ptr++;
-		if (((longword - lomagic) & ~longword & himagic))
-		{
-			i = 0;
-			cp = (const char *)(longword_ptr - 1);
-			while (i < 4)
-			{
-				if (!cp[i])
-					return (cp + i);
-				++i;
-			}
-			if (sizeof(longword) > 4)
-				while (i < 8)
-					if (!cp[i++])
-						return (cp + i - 1);
-		}
-	}
-}
-
-size_t				ft_strlen(const char *str)
-{
-	const char				*char_ptr;
-	const unsigned long		*longword_ptr;
-	unsigned long			longword;
-	unsigned long			himagic;
-	unsigned long			lomagic;
-
-	char_ptr = str;
-	while ((unsigned long int)char_ptr & (sizeof(longword) - 1))
-		if (!(*char_ptr++))
-			return (char_ptr - str - 1);
-	longword_ptr = (unsigned long *)char_ptr;
-	himagic = 0x80808080L;
-	lomagic = 0x01010101L;
-	if (sizeof(longword) > 8)
-		abort();
-	else if (sizeof(longword) > 4)
-	{
-		himagic = ((himagic << 16) << 16) | himagic;
-		lomagic = ((lomagic << 16) << 16) | lomagic;
-	}
-	return (byte_zero(longword_ptr, lomagic, himagic) - str);
+	if (!str)
+		return (0);
+	end = str;
+	while (*end)
+		end++;
+	return (end - str);
 }

@@ -6,28 +6,28 @@
 /*   By: acolas <acolas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/29 17:23:52 by acolas            #+#    #+#             */
-/*   Updated: 2019/04/10 18:27:16 by acolas           ###   ########.fr       */
+/*   Updated: 2019/04/15 16:56:24 by acolas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strjoin(char const *s1, char const *s2)
+char	*ft_strjoin(char *str1, char *str2)
 {
-	unsigned int	len;
-	char			*dst;
+	char	*res;
+	char	*res_tmp;
 
-	if (s1 && s2)
-	{
-		len = ft_strlen(s1) + ft_strlen(s2);
-		dst = (char *)malloc(sizeof(*dst) * (len + 1));
-		if (dst == 0)
-			return (NULL);
-		ft_strcpy(dst, s1);
-		ft_strcat(dst, s2);
-		return (dst);
-	}
-	return (0);
+	if (!str1 || !str2)
+		return (ft_strdup(str1 ? str1 : str2));
+	if (!(res = ft_mlc(ft_strlen(str1) + ft_strlen(str2) + 1)))
+		return (0);
+	res_tmp = res;
+	while (*str1)
+		*res++ = *str1++;
+	while (*str2)
+		*res++ = *str2++;
+	*res = '\0';
+	return (res_tmp);
 }
 
 char	*ft_strfjoin(char *str1, char *str2, uint8_t f)
